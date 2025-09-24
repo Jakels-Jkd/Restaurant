@@ -40,8 +40,8 @@ const router = createRouter({
       component: Orders
     },
     {
-      name: 'reservation',
-      path: '/reservation',
+      name: 'reservations',
+      path: '/reservations',
       component: Reservation
     },
     {
