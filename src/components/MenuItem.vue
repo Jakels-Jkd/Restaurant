@@ -1,7 +1,32 @@
 <script setup> 
-import { useMenuStore } from '../stores/Menu';   
+import { ref } from 'vue';
+import { useMenuStore } from '../stores/Menu';  
+
 const menuStore = useMenuStore();
 const menuItem = menuStore.selectedMenuItem;
+
+const quantity = ref(null)
+
+function order(){
+    
+    let existingOrder = JSON.parse(localStorage.getItem("Order")
+    )
+    if (existingOrder == null){
+        existingOrder=[]
+    }
+    let currentOrder ={
+        menuItem: menuItem,
+        quantity: quantity.value,
+        paymentStatus: false,
+        user: JSON.parse(localStorage.getItem( "signUpData"))
+    }
+    existingOrder.push(currentOrder)
+    try {
+        localStorage.setItem( 'Order', JSON.stringify(existingOrder));
+    }catch (err) {
+        console.error('Order process failed', err)
+    }
+}
 
 </script> 
 <template>
@@ -21,6 +46,7 @@ const menuItem = menuStore.selectedMenuItem;
                 <v-col md="2"> Quantity. </v-col>
                 <v-col md="4">
                     <v-number-input
+                        v-model="quantity"
                         control-variant="split"
                         density="compact"
                         :min="1"
@@ -29,7 +55,7 @@ const menuItem = menuStore.selectedMenuItem;
                 </v-col>
                 </v-row>
                 <v-card-actions>
-                    <v-btn color="blue-darken-4" variant="elevated">Order</v-btn>
+                    <v-btn color="blue-darken-4" variant="elevated" @click="order()">Order</v-btn>
                 </v-card-actions>
                
                 </v-card>
