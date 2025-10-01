@@ -314,6 +314,7 @@ function close(){
                     <v-row dense>
                         <v-col cols="12" md="2" sm="6" > Category: </v-col>
                         <v-col cols="12" md="10" sm="6">
+                            <v-radio-group v-model="category">
                                 <v-row>
                                     <v-col cols="12" md="6" sm="6" >
                                         <v-radio label="Food" value="2"></v-radio>
