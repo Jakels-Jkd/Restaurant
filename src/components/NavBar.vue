@@ -1,5 +1,5 @@
 <script setup> 
-
+const isAdmin =true
 const isLoggedIn =  JSON.parse(localStorage.getItem( "isLoggedIn"));
 </script> 
 <template>
@@ -14,7 +14,9 @@ const isLoggedIn =  JSON.parse(localStorage.getItem( "isLoggedIn"));
     <v-avatar to="/userprofile" v-if='isLoggedIn'>
     <span class="text-h5 text-white">J</span>
     </v-avatar>
-
+   <v-btn to="/admin" v-if="isLoggedIn && isAdmin">Admin</v-btn>
+  
     <v-btn to="/login" v-else>Log In</v-btn>
 </v-app-bar>
+
 </template>
